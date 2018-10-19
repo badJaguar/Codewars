@@ -17,13 +17,8 @@ namespace ReverseWords_7Kyu
 
     public static class Kata
     {
-        public static string ReverseWords(string str)
-        {
-            var reversedWords = str.Split(' ').Reverse();
-            var words = reversedWords as string[] ?? reversedWords.ToArray();
-            Array.Reverse(words.ToArray());
-            str = string.Join(" ", words);
-            return new string(str.ToArray().Reverse().ToArray());
-        }
+        public static string ReverseWords(string str) => string
+            .Join(" ", str.Split(' ')
+            .Select(i=> new string(i.Reverse().ToArray())));
     }
 }
