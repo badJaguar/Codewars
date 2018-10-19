@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2046
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReverseWords_7Kyu", "ReverseWords_7Kyu\ReverseWords_7Kyu.csproj", "{33407CF8-11C2-4AFA-9B8D-4BA6E0AB3B2D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33407CF8-11C2-4AFA-9B8D-4BA6E0AB3B2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33407CF8-11C2-4AFA-9B8D-4BA6E0AB3B2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33407CF8-11C2-4AFA-9B8D-4BA6E0AB3B2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33407CF8-11C2-4AFA-9B8D-4BA6E0AB3B2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C59CDB00-A1C3-4431-AF7E-3C8ABA2C321F}
+	EndGlobalSection
+EndGlobal
