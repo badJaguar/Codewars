@@ -10,7 +10,7 @@ namespace ReverseWords_7Kyu
     {
         static void Main()
         {
-            Console.WriteLine(Kata.ReverseWords("This is an example!"));
+            Console.WriteLine(Kata.ReverseWords("This  is an example!"));
             Console.ReadKey();
         }
     }
@@ -19,12 +19,11 @@ namespace ReverseWords_7Kyu
     {
         public static string ReverseWords(string str)
         {
-            var words = from s in str.Split()
-                        select s.Insert(s.Length, " ").TrimStart()
-                            .Reverse().ToArray(); // 1st variant.
-
+            var reversedWords = str.Split(' ').Reverse();
+            var words = reversedWords as string[] ?? reversedWords.ToArray();
+            Array.Reverse(words.ToArray());
+            str = string.Join(" ", words);
             return new string(str.ToArray().Reverse().ToArray());
         }
     }
-    //str.Split().Select(s => s.Insert(s.Length, " ").TrimStart().Reverse())
 }
