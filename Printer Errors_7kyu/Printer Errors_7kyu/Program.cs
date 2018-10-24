@@ -25,8 +25,8 @@ namespace Printer_Errors_7kyu
         public static string PrinterError(string s)
         {
             var regexError = new Regex("[n-z]", RegexOptions.Compiled);
-            var regErr = regexError.Matches(s);
-            return $"{regErr.Count}/{s.Length}";
+            var errors = regexError.Matches(s);
+            return $"{errors.Count}/{s.Length}";
         }
     }
 }
