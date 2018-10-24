@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace SplitString_6kyu
@@ -7,12 +8,14 @@ namespace SplitString_6kyu
     {
         static void Main()
         {
+            var watch = new Stopwatch();
             // Complete the solution so that it splits the string into pairs of two characters. 
             // If the string contains an odd number of characters then it should replace the missing
             // second character of the final pair with an underscore ('_').
-
-            Console.WriteLine(SplitString.Solution("abc"));
-            Console.WriteLine(SplitString.Solution("abcdef"));
+            watch.Start();
+            SplitString.Solution("abc");
+            SplitString.Solution("abcdef");
+            Console.WriteLine(watch.ElapsedMilliseconds);
             Console.ReadKey();
         }
     }
