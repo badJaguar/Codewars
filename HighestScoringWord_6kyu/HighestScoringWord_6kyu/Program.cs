@@ -21,9 +21,8 @@ namespace HighestScoringWord_6kyu
     {
         public static string High(string s)
         {
-            var regex = new Regex("[A-Z]");
-
-            var e = s.ToLower().Remove(' ').ToCharArray();
+            var m = s.Split(' ').ToArray();
+            var e = s.ToLower().ToCharArray();
             foreach (var VARIABLE in e)
             {
                 var index = (int)VARIABLE % 32;
