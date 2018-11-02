@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace AbbreviateaTwoWordName_8kyu
 {
     class Program
     {
@@ -17,8 +17,14 @@ namespace ConsoleApp1
 
         public class Kata
         {
-            public static string AbbrevName(string name) =>
-                $"{name[0]}.{name[name.IndexOf(' ') + 1]}".ToUpper();
+            public static string AbbrevName(string name)
+            {
+                var regName = (Regex.Replace(name.Split(' ').First(), "\\s(.*)", string.Empty));
+                var regLastN = (Regex.Replace(name.Split(' ').Last(), "\\s(.*)", string.Empty));
+
+                return $"{regName.Remove(1, regName.Length - 1).ToUpper()}." +
+                       $"{regLastN.Remove(1, regLastN.Length - 1).ToUpper()}";
+            }
         }
     }
 }
