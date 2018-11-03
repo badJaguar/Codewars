@@ -21,21 +21,18 @@ namespace HighestScoringWord_6kyu
     {
         public static string High(string s)
         {
-            var regex = new Regex("[A-Z]");
             var m = s.ToLower().Split(' ').ToArray();
-            var e = s.ToLower().ToCharArray();
 
             foreach (string n in m)
             {
-                Console.Write($"{n.ToCharArray().Select(h=> (int)h % 32).Sum()} ");
+                var sum = new[]
+                {
+                    n.ToCharArray()
+                        .Select(h => (int) h % 32).Sum()
+                };
+
+                Console.Write($"{sum.Max()} ");
             }
-
-            //foreach (var num in e)
-            //{
-            //    var index = (int)num % 32;
-
-            //    Console.WriteLine(index);
-            //}
             return string.Empty;
         }
     }
