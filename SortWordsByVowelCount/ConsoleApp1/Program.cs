@@ -10,7 +10,7 @@ namespace SortWordsByVowelCount
     {
         static void Main()
         {
-            Console.WriteLine(SortByVowels.Sorted("love", "I", "communication", "greater"));
+            Console.WriteLine(SortByVowels.Sorted("love", "I","dowegonn", "communication", "greater"));
             Console.ReadKey();
         }
     }
