@@ -17,18 +17,31 @@ namespace HighestScoringWord_6kyu
     {
         public static string High(string s)
         {
-            var splitWords = s.ToLower().Split(' ').ToArray();
+            var splitWords = (s.ToLower().Split(' ').ToArray())
 
-            foreach (var word in splitWords)
-            {
-                var highestCount = new[]
-                {
-                    word.ToCharArray()
-                        .Select(h => (int) h % 32).Sum()
-                };
+                               .Select(r => new[]
+                               {
+                                   r.ToCharArray()
+                                    .Select(g => (int) g % 32).Sum()
+                               })
+                               .Select(u => u[0]);
 
-                Console.Write($"{highestCount[0]} ");
-            }
+            var l = string.Join(" ", splitWords);
+            Console.WriteLine(l);
+
+            //foreach (var word in splitWords)
+            //{
+            //    var highestCount = new[]
+            //    {
+            //        word.ToCharArray()
+            //            .Select(h => (int) h % 32).Sum()
+            //    };
+
+            //    var e = (new[] { word.ToCharArray().Select(g => (int)g % 32).Sum() });
+            //var i = string.Join(" ", splitWords);
+
+            //Console.Write($"{i[0]} ");
+            //}
             return string.Empty;
         }
     }
