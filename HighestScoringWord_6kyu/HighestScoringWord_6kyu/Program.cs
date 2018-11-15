@@ -27,7 +27,7 @@ namespace HighestScoringWord_6kyu
                         .Select(h => (int) h % 32).Sum()
                 };
 
-                Console.Write($"{highestCount.Max()} ");
+                Console.Write($"{highestCount[0]} ");
             }
             return string.Empty;
         }
