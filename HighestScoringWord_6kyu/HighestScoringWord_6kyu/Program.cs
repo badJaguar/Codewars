@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace HighestScoringWord_6kyu
 {
@@ -21,17 +17,17 @@ namespace HighestScoringWord_6kyu
     {
         public static string High(string s)
         {
-            var m = s.ToLower().Split(' ').ToArray();
+            var splitWords = s.ToLower().Split(' ').ToArray();
 
-            foreach (string n in m)
+            foreach (var word in splitWords)
             {
-                var sum = new[]
+                var highestCount = new[]
                 {
-                    n.ToCharArray()
+                    word.ToCharArray()
                         .Select(h => (int) h % 32).Sum()
                 };
 
-                Console.Write($"{sum.Max()} ");
+                Console.Write($"{highestCount.Max()} ");
             }
             return string.Empty;
         }
