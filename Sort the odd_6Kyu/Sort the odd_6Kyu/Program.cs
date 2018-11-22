@@ -27,12 +27,8 @@ namespace Sort_the_odd_6Kyu
                        where a % 2 != 0
                        select a).ToArray();
 
-            var even = (from a in array
-                        where a % 2 == 0
-                        select a).ToArray();
-
+            var even = array.Where(a => a % 2 == 0);
             Array.Sort(odd, array);
-
             Console.WriteLine(string.Join(" ", array));
             return default(int[]);
         }
