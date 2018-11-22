@@ -23,13 +23,17 @@ namespace Sort_the_odd_6Kyu
     {
         public static int[] SortArray(int[] array)
         {
-            var odd = (from a in array
-                       where a % 2 != 0
-                       select a).ToArray();
+            var indexedNums = array.Select((num, idx) => new { num, idx }).ToList();
 
-            var even = array.Where(a => a % 2 == 0);
-            Array.Sort(odd, array);
-            Console.WriteLine(string.Join(" ", array));
+            var evens = indexedNums.Where(x => x.num % 2 == 0);
+            var odds = indexedNums.Where(x => x.num % 2 == 1);
+
+            var sortedOdds = odds.OrderBy(x => x.num); //sort the odd numbers by their value
+
+            var reindexedOdds = sortedOdds.Zip(odds, (o1, o2) => new { o1.num, o2.idx });
+
+                var endSequence = evens.Concat(reindexedOdds).OrderBy(x => x.idx).Select(x => x.num);
+            Console.WriteLine(string.Join(" ", endSequence));
             return default(int[]);
         }
     }
