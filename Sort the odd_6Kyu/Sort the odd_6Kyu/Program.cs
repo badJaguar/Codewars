@@ -13,8 +13,8 @@ namespace Sort_the_odd_6Kyu
         static void Main()
         {
             Console.WriteLine(Kata.SortArray(new[] { 5, 3, 2, 8, 1, 4 })); // 1, 3, 2, 8, 5, 4
-            Console.WriteLine(Kata.SortArray(new[] { 5, 3, 1, 8, 0 })); // 1, 3, 5, 8, 0
-            Console.WriteLine(Kata.SortArray(new int[] { }));
+            //Console.WriteLine(Kata.SortArray(new[] { 5, 3, 1, 8, 0 })); // 1, 3, 5, 8, 0
+            //Console.WriteLine(Kata.SortArray(new int[] { }));
             Console.ReadKey();
         }
     }
@@ -27,7 +27,12 @@ namespace Sort_the_odd_6Kyu
                        where a % 2 != 0
                        select a).ToArray();
 
+            var even = (from a in array
+                        where a % 2 == 0
+                        select a).ToArray();
+
             Array.Sort(odd, array);
+
             Console.WriteLine(string.Join(" ", array));
             return default(int[]);
         }
