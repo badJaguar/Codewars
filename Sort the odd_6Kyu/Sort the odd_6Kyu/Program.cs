@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Sort_the_odd_6Kyu
 {
@@ -13,8 +14,8 @@ namespace Sort_the_odd_6Kyu
         static void Main()
         {
             Console.WriteLine(Kata.SortArray(new[] { 5, 3, 2, 8, 1, 4 })); // 1, 3, 2, 8, 5, 4
-            //Console.WriteLine(Kata.SortArray(new[] { 5, 3, 1, 8, 0 })); // 1, 3, 5, 8, 0
-            //Console.WriteLine(Kata.SortArray(new int[] { }));
+            Console.WriteLine(Kata.SortArray(new[] { 5, 3, 1, 8, 0 })); // 1, 3, 5, 8, 0
+            Console.WriteLine(Kata.SortArray(new int[] { }));
             Console.ReadKey();
         }
     }
@@ -23,17 +24,40 @@ namespace Sort_the_odd_6Kyu
     {
         public static int[] SortArray(int[] array)
         {
-            var indexedNums = array.Select((num, idx) => new { num, idx }).ToList();
+            var indexed = array.Select((num, ind) => // Indexing sequences
+                new
+                {
+                    Number = num,
+                    Index = ind
+                }).ToList();
 
-            var evens = indexedNums.Where(x => x.num % 2 == 0);
-            var odds = indexedNums.Where(x => x.num % 2 == 1);
+            var evens = (from i in indexed // Evens finds
+                         where i.Number % 2 == 0
+                         select i).ToList();
 
-            var sortedOdds = odds.OrderBy(x => x.num); //sort the odd numbers by their value
+            var odds = (from i in indexed // Odds finds
+                        where i.Number % 2 != 0
+                        select i).ToList();
 
-            var reindexedOdds = sortedOdds.Zip(odds, (o1, o2) => new { o1.num, o2.idx });
+            var sortedOdds = from o in odds // Odds sorting
+                             orderby o.Number
+                             select o;
 
-                var endSequence = evens.Concat(reindexedOdds).OrderBy(x => x.idx).Select(x => x.num);
-            Console.WriteLine(string.Join(" ", endSequence));
+            // Replace on a places in present array of odd numbers to sortedOdds by index.
+            // Sorted odds takes places by index of odds.
+            var reindexOdds = sortedOdds.Zip(odds,
+                (x, y) =>
+                    new
+                    {
+                        x.Number,
+                        y.Index
+                    });
+
+            var evensOddsConcat = (from e in evens.Concat(reindexOdds)
+                                   orderby e.Index
+                                   select e.Number).ToArray();
+
+            Console.WriteLine(string.Join(" ", evensOddsConcat));
             return default(int[]);
         }
     }
