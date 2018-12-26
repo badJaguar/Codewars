@@ -1,9 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace AlphabetWar_7kyu
 {
@@ -34,10 +30,10 @@ namespace AlphabetWar_7kyu
 
         static void Main(string[] args)
         {
-            Console.WriteLine(Kata.AlphabetWar("az"));
-            Console.WriteLine(Kata.AlphabetWar("bpq"));
             Console.WriteLine(Kata.AlphabetWar("z"));
-            Console.WriteLine(Kata.AlphabetWar("tk"));
+            //Console.WriteLine(Kata.AlphabetWar("bpq"));
+            //Console.WriteLine(Kata.AlphabetWar("z"));
+            //Console.WriteLine(Kata.AlphabetWar("tk"));
             Console.WriteLine(Kata.AlphabetWar("zdqmwpbs"));
             Console.WriteLine(Kata.AlphabetWar("zzzzs"));
             Console.WriteLine(Kata.AlphabetWar("wwwwwwz"));
@@ -48,23 +44,60 @@ namespace AlphabetWar_7kyu
         {
             public static string AlphabetWar(string fight)
             {
-                //var victim = (from f in fight.ToLower().Trim('a', 'c', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'n', 'o', 'r', 't',
-                //    'u', 'v', 'x', 'y').Split()
-                //              select f).ToArray();
+                var victims = new char[] {
+                    (char)('a' - char.Parse("a")), (char)('c' - char.Parse("c")), (char)('e' - char.Parse("e")),
+                    (char)('f' - char.Parse("f")), (char)('g' - char.Parse("g")), (char)('h' - char.Parse("h")),
+                    (char)('i' - char.Parse("i")), (char)('j' - char.Parse("j")), (char)('k' - char.Parse("k")),
+                    (char)('l' - char.Parse("l")), (char)('n' - char.Parse("n")), (char)('o' - char.Parse("o")),
+                    (char)('r' - char.Parse("r")), (char)('t' - char.Parse("t")), (char)('u' - char.Parse("u")),
+                    (char)('v' - char.Parse("v")), (char)('x' - char.Parse("x")), (char)('y' - char.Parse("y"))
+                };
 
-                var @string = (from f in fight.ToLower().Split()
-                               select f).SelectMany(_ => _).ToList();
+                var leftChars = new char[]
+                {
+                    (char)('w' - char.Parse("w") + 4),
+                    (char)('p' - char.Parse("p") + 3),
+                    (char)('b' - char.Parse("b") + 2),
+                    (char)('s' - char.Parse("s") + 1)
+                };
 
-                var leftSide = (from str in @string
-                                select str).Count("wpbs".Contains);
+                var rightChars = new char[]
+                {
+                    (char)('m' - char.Parse("m") + 4),
+                    (char)('q' - char.Parse("q") + 3),
+                    (char)('d' - char.Parse("d") + 2),
+                    (char)('z' - char.Parse("z") + 1)
+                };
 
-                var rightSide = (from str in @string
-                                 select str).Count("mqdz".Contains);
+                var vicsToZero = (from v in fight
+                                  select v).Select(y => (int)y);
 
+                //Console.WriteLine($"{string.Join(" ", vicsToZero)} victims");
+
+                var left = (from f in fight
+                            from v in victims
+                            where f is 'w'
+                               || f is 'p'
+                               || f is 'b'
+                               || f is 's'
+                            select f + v).Select(t => (int)t).Sum();
+
+                var right = (from f in fight
+                             where f is 'm'
+                                || f is 'q'
+                                || f is 'd'
+                                || f is 'z'
+                             select f).Select(t => (int)t).Sum();
+
+                //var stringList = (from f in fight.ToLower().Split()
+                //                  select f).SelectMany(_ => _).ToArray().Except(victims);
+
+                //Console.WriteLine($"{string.Join("", left)} is left");
+                //Console.WriteLine($"{string.Join("", right)} is right");
                 //Console.WriteLine($"{string.Join(" ", left)} left;\n {string.Join(" ", right)} right;\n {string.Join("", str)}");
                 return
-                leftSide > rightSide ? "Left side wins!"
-                : (leftSide < rightSide ? "Right side wins!"
+                leftChars.Select(e => (int)e).Sum() < rightChars.Select(h => (int)h).Sum() ? "Left side wins!"
+                : (leftChars.Select(e => (int)e).Sum() > rightChars.Select(h => (int)h).Sum() ? "Right side wins!"
                 : "Let's fight again!");
             }
         }
