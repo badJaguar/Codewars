@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text;
 
 namespace AlphabetWar_7kyu
 {
@@ -31,9 +32,9 @@ namespace AlphabetWar_7kyu
         static void Main(string[] args)
         {
             Console.WriteLine(Kata.AlphabetWar("z"));
-            //Console.WriteLine(Kata.AlphabetWar("bpq"));
-            //Console.WriteLine(Kata.AlphabetWar("z"));
-            //Console.WriteLine(Kata.AlphabetWar("tk"));
+            Console.WriteLine(Kata.AlphabetWar("bpq"));
+            Console.WriteLine(Kata.AlphabetWar("z"));
+            Console.WriteLine(Kata.AlphabetWar("tk"));
             Console.WriteLine(Kata.AlphabetWar("zdqmwpbs"));
             Console.WriteLine(Kata.AlphabetWar("zzzzs"));
             Console.WriteLine(Kata.AlphabetWar("wwwwwwz"));
@@ -61,6 +62,9 @@ namespace AlphabetWar_7kyu
                     (char)('s' - char.Parse("s") + 1)
                 };
 
+                var y = from u in leftChars
+                        select u;
+
                 var rightChars = new char[]
                 {
                     (char)('m' - char.Parse("m") + 4),
@@ -68,26 +72,26 @@ namespace AlphabetWar_7kyu
                     (char)('d' - char.Parse("d") + 2),
                     (char)('z' - char.Parse("z") + 1)
                 };
+                var rt = (from f in fight.ToCharArray()
+                          let w = (char)('w' - char.Parse("w") + 4)
+                          let p = (char)('p' - char.Parse("p") + 3)
+                          let b = (char)('b' - char.Parse("b") + 2)
+                          let s = (char)('s' - char.Parse("s") + 1)
+                          let vic = victims.Select(u => u)
+                          let left = w - char.Parse("w") + 4 | p - char.Parse("p") + 3 | b - char.Parse("b") + 2 | s - char.Parse("s") + 1
+                          select (f - f) != 0 ? 0 : f + left);
 
-                var vicsToZero = (from v in fight
-                                  select v).Select(y => (int)y);
+                var l = (from v in leftChars
+                         select v).Select(t => (int)t).Sum();
 
-                //Console.WriteLine($"{string.Join(" ", vicsToZero)} victims");
+                var r = (from v in rightChars
+                         select v).Select(t => (int)t).Sum();
 
-                var left = (from f in fight
-                            from v in victims
-                            where f is 'w'
-                               || f is 'p'
-                               || f is 'b'
-                               || f is 's'
-                            select f + v).Select(t => (int)t).Sum();
+                //var vicsToZero = (from f in fight
+                //                  select f).Select(y => (int)y);
 
-                var right = (from f in fight
-                             where f is 'm'
-                                || f is 'q'
-                                || f is 'd'
-                                || f is 'z'
-                             select f).Select(t => (int)t).Sum();
+
+                Console.WriteLine($"{string.Join(" ", rt)} victims");
 
                 //var stringList = (from f in fight.ToLower().Split()
                 //                  select f).SelectMany(_ => _).ToArray().Except(victims);
@@ -95,10 +99,10 @@ namespace AlphabetWar_7kyu
                 //Console.WriteLine($"{string.Join("", left)} is left");
                 //Console.WriteLine($"{string.Join("", right)} is right");
                 //Console.WriteLine($"{string.Join(" ", left)} left;\n {string.Join(" ", right)} right;\n {string.Join("", str)}");
-                return
-                leftChars.Select(e => (int)e).Sum() < rightChars.Select(h => (int)h).Sum() ? "Left side wins!"
-                : (leftChars.Select(e => (int)e).Sum() > rightChars.Select(h => (int)h).Sum() ? "Right side wins!"
-                : "Let's fight again!");
+                return default;
+                //leftChars.Select(e => (int)e).Sum() < rightChars.Select(h => (int)h).Sum() ? "Left side wins!"
+                //: (leftChars.Select(e => (int)e).Sum() > rightChars.Select(h => (int)h).Sum() ? "Right side wins!"
+                //: "Let's fight again!");
             }
         }
     }
