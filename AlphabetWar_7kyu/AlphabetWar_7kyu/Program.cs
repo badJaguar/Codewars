@@ -1,8 +1,6 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Xml;
-using Int32 = System.Int32;
 
 namespace AlphabetWar_7kyu
 {
@@ -33,6 +31,8 @@ namespace AlphabetWar_7kyu
 
         static void Main()
         {
+            var watch = new Stopwatch();
+            watch.Start();
             Console.WriteLine(Kata.AlphabetWar("z"));
             Console.WriteLine(Kata.AlphabetWar("bpq"));
             Console.WriteLine(Kata.AlphabetWar("z"));
@@ -40,39 +40,32 @@ namespace AlphabetWar_7kyu
             Console.WriteLine(Kata.AlphabetWar("zdqmwpbs"));
             Console.WriteLine(Kata.AlphabetWar("zzzzs"));
             Console.WriteLine(Kata.AlphabetWar("wwwwwwz"));
+
+            var t = watch.ElapsedMilliseconds;
+            Console.WriteLine(t);
+
             Console.ReadKey();
         }
 
         public class Kata
         {
-
             public static string AlphabetWar(string fight)
             {
-                var r = (from e in "mqdz".ToCharArray()
-                         select e).First();
-                var l = (from e in "wpbs".ToCharArray()
-                         select e).First();
+                var leftSide = (from f in fight.ToLower()
+                                select f == 'w' ? (char)4
+                                    : (f == 'p' ? (char)3
+                                    : (f == 'b' ? (char)2
+                                    : (f == 's' ? (char)1 : 0)))).Sum();
 
-                var rightPower = (from f in fight
-                                  select f == 'm' ? r = (char)4
-                                      : (f == 'q' ? r = (char)3
-                                      : (f == 'd' ? r = (char)2
-                                      : (f == 'z' ? r = (char)1 : 0)))).Sum();
+                var rightSide = (from f in fight.ToLower()
+                                 select f == 'm' ? (char)4
+                                     : (f == 'q' ? (char)3
+                                     : (f == 'd' ? (char)2
+                                     : (f == 'z' ? (char)1 : 0)))).Sum();
 
-                var leftPower = (from f in fight
-                                 select f == 'w' ? l = (char)4
-                                     : (f == 'p' ? l = (char)3
-                                     : (f == 'b' ? l = (char)2
-                                     : (f == 's' ? l = (char)1 : 0)))).Sum();
-
-
-                Console.WriteLine($"{string.Join("", leftPower)} {string.Join("", rightPower)}");
-
-                //Console.WriteLine($"{string.Join(" ", left)} left;\n {string.Join(" ", right)} right;\n {string.Join("", str)}");
-                return default;
-                //  leftChars < rightChars ? "Left side wins!"
-                //: (leftChars > rightChars ? "Right side wins!"
-                //: "Let's fight again!");
+                return leftSide > rightSide ? "Left side wins!"
+                       : (leftSide < rightSide ? "Right side wins!"
+                       : "Let's fight again!");
             }
         }
     }
