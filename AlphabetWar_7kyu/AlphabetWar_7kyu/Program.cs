@@ -31,9 +31,9 @@ namespace AlphabetWar_7kyu
         //        AlphabetWar("zzzzs");    //=> Right side wins!
         //        AlphabetWar("wwwwwwz");  //=> Left side wins!
 
-        static void Main(string[] args)
+        static void Main()
         {
-            //Console.WriteLine(Kata.AlphabetWar("z"));
+            Console.WriteLine(Kata.AlphabetWar("z"));
             Console.WriteLine(Kata.AlphabetWar("bpq"));
             Console.WriteLine(Kata.AlphabetWar("z"));
             Console.WriteLine(Kata.AlphabetWar("tk"));
@@ -45,18 +45,33 @@ namespace AlphabetWar_7kyu
 
         public class Kata
         {
+
             public static string AlphabetWar(string fight)
             {
-                var left = int.TryParse(fight, out char t -'0');
+                var r = (from e in "mqdz".ToCharArray()
+                         select e).First();
+                var l = (from e in "wpbs".ToCharArray()
+                         select e).First();
+
+                var rightPower = (from f in fight
+                                  select f == 'm' ? r = (char)4
+                                      : (f == 'q' ? r = (char)3
+                                      : (f == 'd' ? r = (char)2
+                                      : (f == 'z' ? r = (char)1 : 0)))).Sum();
+
+                var leftPower = (from f in fight
+                                 select f == 'w' ? l = (char)4
+                                     : (f == 'p' ? l = (char)3
+                                     : (f == 'b' ? l = (char)2
+                                     : (f == 's' ? l = (char)1 : 0)))).Sum();
 
 
-
-                Console.WriteLine($"{t} victims");
+                Console.WriteLine($"{string.Join("", leftPower)} {string.Join("", rightPower)}");
 
                 //Console.WriteLine($"{string.Join(" ", left)} left;\n {string.Join(" ", right)} right;\n {string.Join("", str)}");
                 return default;
-                //leftChars.Select(e => (int)e).Sum() < rightChars.Select(h => (int)h).Sum() ? "Left side wins!"
-                //: (leftChars.Select(e => (int)e).Sum() > rightChars.Select(h => (int)h).Sum() ? "Right side wins!"
+                //  leftChars < rightChars ? "Left side wins!"
+                //: (leftChars > rightChars ? "Right side wins!"
                 //: "Let's fight again!");
             }
         }
