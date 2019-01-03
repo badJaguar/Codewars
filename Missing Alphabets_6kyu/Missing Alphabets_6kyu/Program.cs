@@ -1,10 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace Missing_Alphabets_6kyu
 {
@@ -13,7 +11,7 @@ namespace Missing_Alphabets_6kyu
         static void Main()
         {
 
-            Console.WriteLine(Kata.MissingAlphabets("abcdefghijklmnopqrstuvwxy")); //z
+            //Console.WriteLine(Kata.MissingAlphabets("abcdefghijklmnopqrstuvwxy")); //z
             Console.WriteLine(Kata.MissingAlphabets("abbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxy")); //ayzz
             Console.WriteLine(Kata.MissingAlphabets("aabbccddeeffgghhiijjkkllmmnnooppqqrrssttuuvvwwxxyy")); //zz
             Console.WriteLine(Kata.MissingAlphabets("codewars")); //bfghijklmnpqtuvxyz
@@ -24,17 +22,13 @@ namespace Missing_Alphabets_6kyu
         {
             public static string MissingAlphabets(string str)
             {
-                var alphabet = (from a in "abcdefghijklmnopqrstuvwxyz"
-                                select a);
+                var alphabet = (from d in "abcdefghijklmnopqrstuvwxyz"
+                    select d).ToList();
 
-                var vara = from s in str
-                           select s;
-                var alphabet1 = "abcdefghijklmnopqrstuvwxyz";
+                var result = alphabet.ToList().FindAll(d=> !str.ToList().Contains(d));
 
-                var e = Regex.Matches(str, alphabet1);
-
-                Console.WriteLine($"{string.Concat(e)}");
-                return default;
+                Console.WriteLine($"{string.Join(" ",result)}");
+                return default; // only regex
             }
         }
     }
