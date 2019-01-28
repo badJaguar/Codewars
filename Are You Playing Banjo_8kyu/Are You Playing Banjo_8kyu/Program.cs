@@ -19,8 +19,7 @@ namespace Are_You_Playing_Banjo_8kyu
         public class Kata
         {
             public static string AreYouPlayingBanjo(string name) =>
-              name.StartsWith("R")
-              || name.StartsWith("r")
+              name.StartsWith("R") || name.StartsWith("r")
               ? $"{name} plays banjo"
               : $"{name} does not play banjo";
         }
