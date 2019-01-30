@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,12 +23,16 @@ namespace Missing_Alphabets_6kyu
         {
             public static string MissingAlphabets(string str)
             {
-                var alphabet = (from d in "abcdefghijklmnopqrstuvwxyz"
-                    select d).ToList();
+                var alphabet = (from d in "abcdefghijklmnopqrstuvwxyz".ToCharArray()
+                                select d);
 
-                var result = alphabet.ToList().FindAll(d=> !str.ToList().Contains(d));
+                var res = from a in str.ToCharArray()
+                          where !str.Contains(alphabet.First())
+                          select a;
 
-                Console.WriteLine($"{string.Join(" ",result)}");
+                //var result = 
+
+                Console.WriteLine($"{string.Join(" ", res)}");
                 return default; // only regex
             }
         }
